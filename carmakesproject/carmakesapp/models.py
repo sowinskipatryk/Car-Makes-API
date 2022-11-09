@@ -2,10 +2,11 @@ from django.db import models
 
 # Create your models here.
 
+
 class Car(models.Model):
     make = models.CharField(max_length=256)
     model = models.CharField(max_length=256)
-    avg_rating = models.DecimalField(decimal_places=1, max_digits=2)
+    avg_rating = models.DecimalField(decimal_places=1, max_digits=2, default=0.0)
     rates_number = models.IntegerField(default=0)
 
     def update_rating(self, id):
@@ -17,9 +18,6 @@ class Car(models.Model):
             sum += rate.rating
         self.rates_number = num
         self.avg_rating = sum / num
-        print(sum)
-        print(num)
-        print(self.avg_rating)
         self.save()
 
     def __str__(self):
